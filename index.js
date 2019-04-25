@@ -113,7 +113,7 @@ var con = mysql.createConnection({
     user: "root",
     password: "",
     port: 3308,
-    database: 'buddhasaba',
+    database: 'janapriya',
     multipleStatements: true
 });
 
