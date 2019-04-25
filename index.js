@@ -100,22 +100,22 @@ const cookieParser= require('cookie-parser');
 var nepali = require('get-nepali-number');
 
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "buddha",
-//     password: "Sha677@#",
-//     database: 'buddhasaba',
-//     multipleStatements: true
-// });
-
 var con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "",
-    port: 3308,
+    user: "janapriya",
+    password: "?P7ev40m",
     database: 'janapriya',
     multipleStatements: true
 });
+
+// var con = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "",
+//     port: 3308,
+//     database: 'janapriya',
+//     multipleStatements: true
+// });
 
 
 getEmployeeNames = function(){
