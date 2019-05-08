@@ -122,7 +122,11 @@ getEmployeeNames = function(){
   return new Promise(function(resolve, reject){
     con.query(
         "SELECT * FROM samitipost;SELECT * from samitititle", 
-        function(err, rows){                                                
+        function(err, rows){ 
+            if(err)
+            {
+                console.log(err);
+            }                                               
             if(rows === undefined){
                 reject(new Error("Error rows is undefined"));
             }else{
@@ -241,6 +245,10 @@ var authenticate= function(req,res,next)
     var usertable="SELECT * from userlist where username=? and password=?";
     con.query(usertable,[username,password],function(err,result,fields)
     {
+        if(err)
+        {
+            console.log(err);
+        }
       console.log(result.length);
       if(result.length===0)
       {
@@ -388,9 +396,13 @@ res.status(200).send({'success':"Inserted Successfully"});
 
 app.get('/daybookkhoj',authenticate,function(req,res)
 {
-    var latest = "select * from title";
+    var latest = "select * from userlist";
 
     con.query(latest, function(err, result, fields) {
+        if(err)
+        {
+            console.log(err);
+        }
         accountinformation = result;
         console.log(accountinformation);
         res.render('pages/daybookkhoj', { accountinformation: accountinformation });
@@ -1934,7 +1946,7 @@ app.get('/edit/:title/:id',authenticate, (req, res) => {
 })
 
 app.get('/daybookreturn',authenticate, (req, res) => {
-    var latest = "select * from title";
+    var latest = "select * from userlist";
 
     con.query(latest, function(err, result, fields) {
         accountinformation = result;
