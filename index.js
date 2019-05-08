@@ -396,6 +396,7 @@ app.get('/daybookkhoj',authenticate,function(req,res)
         res.render('pages/daybookkhoj', { accountinformation: accountinformation });
     })
  })
+
 app.get('/kaathdaurastatus',authenticate, function(req, res) {
     var kaathdauradata = "SELECT ka.gullino,ka.kaathname,ka.quantity,ka.unit,kt.status,ka.collectiontype from kaathaamdani as ka inner join kaathtransaction as kt  on  ka.gullino=kt.gullino; select * from kaathnamelist";
     con.query(kaathdauradata, function(err, results, fields) {
@@ -431,24 +432,16 @@ app.post('/ghumtikoshadddata', function(req, res) {
 
 
 app.get('/kaathdaura',authenticate,function(req, res) {
-    var accountquery = "SELECT * from kagroups; SELECT * from paymenttable;select * from accountinformation;select * from title;SELECT * from kaathnamelist";
+    var accountquery = "SELECT * from kagroups; SELECT * from paymenttable;select * from accountinformation;select * from aamdanititle; SELECT * from kaathnamelist";
     con.query(accountquery, function(err, results, fields) {
         // console.log(results[0]);
-        // console.log(results[1]);
+        console.log(results[4]);
+        if(err)
+        {
+            console.log(err);
+        }
         var transactionno;
-        // console.log(result.length);
-        // if (err) throw err;
-        // console.log(result[0].accountname);
-        // console.log("Number of records inserted: " + result.affectedRows);
-        // if (results[1].length === 0) {
-        //     transactionno = 0;
-        // } else {
-        //     for (var i = 0; i < results[1].length; i++) {
-        //         transactionno = Number(results[1][i]['transactionno']);
-        //     }
-        // }
-
-        console.log(transactionno);
+        // console.log(transactionno);
         res.render('pages/kaathdaura', { error: '', results: results[0], transactionno: transactionno, accountinformation: results[2], titles: results[3],kaathname:results[4] });
     });
     // res.render('pages/kaathdaura');
@@ -1045,7 +1038,7 @@ app.post('/pay/:id', function(req, res) {
     //   // res.json({'result':'Submitted'});
     //   });
 
-    var accountquery = "SELECT * from kagroups; SELECT * from paymenttable;select * from accountinformation;select * from title";
+    var accountquery = "SELECT * from kagroups; SELECT * from paymenttable;select * from accountinformation;select * from aamdanititle";
     con.query(accountquery, function(err, results, fields) {
             // console.log(results[0]);
             // console.log(results[1]);
